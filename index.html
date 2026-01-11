@@ -3267,180 +3267,38 @@
     const BG_SESSION_CACHE = Object.create(null); // key: 背景键 → 已选中的 URL 或短码
 
     // 中文背景键 → 直接链接或 { 白天/黑夜: 链接 }
-    const 背景表 = {// —— 其他地区 ——
-      '女贞路街道':       { '白天': 'https://files.catbox.moe/htgr44.jpg', '黑夜': 'https://files.catbox.moe/vmybil.jpg' },
-      '女贞路四号餐桌':        'https://files.catbox.moe/u0yu17.jpg',
-      '女贞路四号楼梯下的储物间':        'https://files.catbox.moe/jeilot.jpg',
-      '女贞路四号哈利卧室':        'https://files.catbox.moe/8tvlz7.jpg',
-      '女贞路四号客厅':        'https://files.catbox.moe/fts769.jpg',
-      '汽车内部':        'https://files.catbox.moe/tuiyto.jpg',
-      '爬虫馆':        'https://files.catbox.moe/2jgrah.jpg',
-      '旅馆':        'https://files.catbox.moe/h10be4.jpg',
-      '动物园':        'https://files.catbox.moe/f8yiyp.png',
-      '海边':        'https://files.catbox.moe/6ahuxa.jpg',
-      '海上小木屋内部':        'https://files.catbox.moe/mewt27.jpg',
-      '普通列车里':        'https://files.catbox.moe/vt0mi8.jpg',
-      '车站':        'https://files.catbox.moe/upd69d.jpg',
-      '街道':       { '白天': 'https://files.catbox.moe/x527eo.jpg', '黑夜': 'https://files.catbox.moe/ma3j5c.jpg' },
-      '通用酒吧':        'https://files.catbox.moe/a3dq0z.jpg',
-      '破釜酒吧内小天井':        'https://files.catbox.moe/jsecvr.jpg',
-      '对角巷':        'https://files.catbox.moe/8aw4dn.jpg',
-      '通用动物商店':        'https://files.catbox.moe/m4jbyy.jpg',
-      '古灵阁大厅':        'https://files.catbox.moe/ckxtnn.jpg',
-      '古灵阁地下通道':        'https://files.catbox.moe/tr2axb.jpg',
-      '古灵阁地下金库':        'https://files.catbox.moe/c1r954.jpg',
-      '通用服装店':        'https://files.catbox.moe/smkgiw.jpg',
-      '丽痕书店':        'https://files.catbox.moe/41tfa0.jpg',
-      '对角巷药店':        'https://files.catbox.moe/so0vfs.jpg',
-      '奥利凡德魔杖店':        'https://files.catbox.moe/hvs1qp.jpg',
-      '国王十字车站第9和10站台间的隔墙':        'https://files.catbox.moe/gfr94x.jpg',
-      '帕笛芙夫人茶馆':        'https://files.catbox.moe/raqvmk.jpg',
-      '尖叫棚屋':        'https://files.catbox.moe/h6zkti.jpg',
-      '霍格莫德街道':       { '白天': 'https://files.catbox.moe/j7l8yg.jpg', '黑夜': 'https://files.catbox.moe/yiv6f7.jpg' },
-      '蜂蜜公爵糖果店':        'https://files.catbox.moe/1mskr4.jpg',
-      '通用商店':        'https://files.catbox.moe/eakbr1.jpg',
-      '帕特奇坩埚店':        'https://files.catbox.moe/i80hht.jpg',
-      '韦斯莱魔法把戏坊':        'https://files.catbox.moe/7a9ts0.jpg',
-      '魁地奇精品店':        'https://files.catbox.moe/vge72u.jpg',
-      '福斯科冰淇淋店':        'https://files.catbox.moe/1h4wl5.jpg',
-      '翻倒巷街道':        'https://files.catbox.moe/mnbake.jpg',
-      '博金-博克商店':        'https://files.catbox.moe/zvyhcj.jpg',
-      '陋居':       { '白天': 'https://files.catbox.moe/tbwb3j.jpg', '黑夜': 'https://files.catbox.moe/c1ztp6.jpg' },
-      '陋居厨房':        'https://files.catbox.moe/lhr23n.jpg',
-      '陋居客厅':        'https://files.catbox.moe/vl594y.jpg',
-      '陋居房间':        'https://files.catbox.moe/kmmr5k.jpg',
-      '罗恩的房间':        'https://files.catbox.moe/y8lirm.jpg',
-      '格里莫广场12号':        'https://files.catbox.moe/7zzq8k.jpg',
-      '格里莫广场12号门厅':        'https://files.catbox.moe/57isum.jpg',
-      '格里莫广场12号餐厅':        'https://files.catbox.moe/eqz3d1.jpg',
-      '格里莫广场卧室':        'https://files.catbox.moe/xm6piy.jpg',
-      '格里莫广场客厅':        'https://files.catbox.moe/20upyp.jpg',
-      '圣芒戈医院':        'https://files.catbox.moe/wfwylo.jpg',
-      '圣芒戈医院走廊':        'https://files.catbox.moe/mcaobk.jpg',
-      '圣芒戈医院病房':        'https://files.catbox.moe/t84hg0.jpg',
-      '戈德里克山谷街道':       { '白天': 'https://files.catbox.moe/twg37p.jpg', '黑夜': 'https://files.catbox.moe/xm60x4.jpg' },
-      '巴沙特的家':        'https://files.catbox.moe/zm4l6u.jpg',
-      '教堂墓地':        'https://files.catbox.moe/a0q394.jpg',
-      '通用山岭':       { '白天': 'https://files.catbox.moe/xf1ni5.jpg', '黑夜': 'https://files.catbox.moe/a9nm0i.jpg' },
-      '洛夫古德家外部':        'https://files.catbox.moe/h79m3h.jpg',
-      '洛夫古德家内部':        'https://files.catbox.moe/cy5s3z.jpg',
-      '魔法部电话亭':        'https://files.catbox.moe/c8tl15.jpg',
-      '魔法部正厅':        'https://files.catbox.moe/7cjcab.jpg',
-      '魔法部审判室':        'https://files.catbox.moe/qhyi0f.jpg',
-      '魔法部电梯':        'https://files.catbox.moe/0zwegp.jpg',
-      '魔法部走廊1':        'https://files.catbox.moe/r578zv.jpg',
-      '魔法部走廊2':        'https://files.catbox.moe/8t13ef.jpg',
-      '魔法部乌姆里奇办公室':        'https://files.catbox.moe/m6efb1.jpg',
-      '地下公共厕所':        'https://files.catbox.moe/lre0n6.jpg',
-      '魔法部通用办公室':        'https://files.catbox.moe/u0ekbp.jpg',
-      '预言厅':        'https://files.catbox.moe/xgzg22.jpg',
-      '死亡厅':        'https://files.catbox.moe/86oq1a.jpg',
-      '马尔福庄园':       { '白天': 'https://files.catbox.moe/ucoy2y.jpg', '黑夜': 'https://files.catbox.moe/q3uno6.jpg' },
-      '冬天马尔福庄园':        'https://files.catbox.moe/tmugx3.jpg',
-      '通用平房':        'https://files.catbox.moe/xgqnyj.jpg',
-      '通用庄园':        'https://files.catbox.moe/1msc9c.jpg',
-      '通用公寓':        'https://files.catbox.moe/gl5uzy.jpg',
-      '花园':        'https://files.catbox.moe/oncf0a.jpg',
-      '草坪':        'https://files.catbox.moe/twvhou.jpg',
-      '庭院':        'https://files.catbox.moe/1z8h48.jpg',
-      '湖畔':        'https://files.catbox.moe/c6z1gc.jpg',
-      '冬季室外':        'https://files.catbox.moe/u91u27.jpg',
-      '黑夜室外':        'https://files.catbox.moe/7thf4z.jpg',
-      '欧式客厅':        'https://files.catbox.moe/mdprd5.jpg',
-      '现代客厅':        'https://files.catbox.moe/7ry98c.jpg',
-      '欧式通用厨房':        'https://files.catbox.moe/dx79ez.jpg',
-      '现代通用厨房':        'https://files.catbox.moe/jebxco.jpg',
-      '欧式卧室1':        'https://files.catbox.moe/0xvzpe.jpg',
-      '欧式卧室2':        'https://files.catbox.moe/mhv75o.jpg',
-      '现代卧室1':        'https://files.catbox.moe/341hr0.jpg',
-      '现代卧室2':        'https://files.catbox.moe/ott216.jpg',
-      '贫穷卧室':        'https://files.catbox.moe/v05hkw.jpg',
-      '书房':        'https://files.catbox.moe/hgzyez.jpg',
-      '浴室':        'https://files.catbox.moe/u03sk4.jpg',
-      '餐厅':        'https://files.catbox.moe/jlp9ry.jpg',
-      '阳台':        'https://files.catbox.moe/5vrx9r.jpg',
-      '楼梯':        'https://files.catbox.moe/1j3qgw.jpg',
-      '走廊':        'https://files.catbox.moe/8emgh9.jpg',
-      // —— 霍格沃茨 ——
-      '霍格沃茨特快列车':        'https://files.catbox.moe/cjfbcy.jpg',
-      '9¾站台':        'https://files.catbox.moe/qofi4k.jpg',
-      '行驶的霍格沃茨特快列车':        'https://files.catbox.moe/20hskr.jpg',
-      '霍格沃茨列车零食手推车':        'https://files.catbox.moe/cv461d.jpg',
-      '霍格沃茨列车包厢1':        'https://files.catbox.moe/vqqiox.jpg',
-      '霍格沃茨列车包厢2':        'https://files.catbox.moe/xd8hg7.jpg',
-      '霍格沃茨列车走廊':        'https://files.catbox.moe/p4u3h5.png',
-      '格兰芬多休息室':        'https://files.catbox.moe/nkgmiv.jpg',
-      '格兰芬多寝室':        'https://files.catbox.moe/tzke02.jpg',
-      '斯莱特林休息室':        'https://files.catbox.moe/3r4nyr.jpg',
-      '通用办公室1':        'https://files.catbox.moe/cwz5f4.jpg',
-      '魔咒课教室':        'https://files.catbox.moe/1swssz.jpg',
-      '奖品陈列室':        'https://files.catbox.moe/dq6fso.jpg',
-      '黑魔法防御术课教室':        'https://files.catbox.moe/ye6iiq.jpg',
-      '魔药课教室':        'https://files.catbox.moe/tq8b6r.jpg',
-      '霍格沃茨草坪':       { '白天': 'https://files.catbox.moe/tzo7r4.jpg', '黑夜': 'https://files.catbox.moe/t4tjr7.jpg' },
-      '魁地奇球场':       { '白天': 'https://files.catbox.moe/7eezna.jpg', '黑夜': 'https://files.catbox.moe/ijpuwt.jpg' },
-      '扫帚棚':        'https://files.catbox.moe/f0uvyz.jpg',
-      '猫头鹰棚屋':        'https://files.catbox.moe/kv6btw.jpg',
-      '霍格沃茨楼梯1':        'https://files.catbox.moe/091w6j.jpg',
-      '霍格沃茨楼梯2':        'https://files.catbox.moe/l18hov.jpg',
-      '黑夜霍格沃茨楼梯':        'https://files.catbox.moe/2q1uo5.jpg',
-      '霍格沃茨窗边':       { '白天': 'https://files.catbox.moe/e6axrg.jpg', '黑夜': 'https://files.catbox.moe/g4jg7d.jpg' },
-      '医疗翼':       { '黑夜': 'https://files.catbox.moe/ao1p44.jpg', '白天': 'https://files.catbox.moe/xdstpe.jpg' },
-      '大厅长桌':        'https://files.catbox.moe/csikhj.jpg',
-      '礼堂（宴会）':        'https://files.catbox.moe/zgy95p.jpg',
-      '礼堂（平时）':        'https://files.catbox.moe/ogcgye.jpg',
-      '图书馆':       { '白天': 'https://files.catbox.moe/i0ba9z.jpg', '黑夜': 'https://files.catbox.moe/06utxh.jpg' },
-      '温室':       { '白天': 'https://files.catbox.moe/2d4gbn.jpg', '黑夜': 'https://files.catbox.moe/jq9lac.jpg' },
-      '学院计分沙漏':        'https://files.catbox.moe/r4pnu0.jpg',
-      '炉火':        'https://files.catbox.moe/ztkczj.jpg',
-      '天文塔':       { '黑夜': 'https://files.catbox.moe/pc2f23.jpg', '白天': 'https://files.catbox.moe/ohom3g.jpg' },
-      '斯内普储藏室':        'https://files.catbox.moe/qjgmy9.jpg',
-      '斯莱特林寝室':        'https://files.catbox.moe/ohywl5.jpg',
-      '胖夫人画像':        'https://files.catbox.moe/bxwbig.jpg',
-      '魔法史教室':        'https://files.catbox.moe/tnd0r0.jpg',
-      '冥想盆':        'https://files.catbox.moe/mbog4h.jpg',
-      '礼堂大门':        'https://files.catbox.moe/bb946x.jpg',
-      '拉文克劳寝室':        'https://files.catbox.moe/h1ualv.jpg',
-      '禁林':       { '白天': 'https://files.catbox.moe/80lte4.jpg', '黑夜': 'https://files.catbox.moe/tdnvnp.jpg' },
-      '通用办公室2':        'https://files.catbox.moe/uqerb5.jpg',
-      '通用教室':       { '白天': 'https://files.catbox.moe/wmfsbm.jpg', '黑夜': 'https://files.catbox.moe/uhhtrd.jpg' },
-      '级长浴室':        'https://files.catbox.moe/m6rq4c.jpg',
-      '走廊':       { '白天': 'https://files.catbox.moe/3gino9.jpg', '黑夜': 'https://files.catbox.moe/8urr1k.jpg' },
-      '通用走廊':        'https://files.catbox.moe/ugtkiu.jpg',
-      '霍格沃茨庭院':       { '白天': 'https://files.catbox.moe/t6qgcy.jpg', '黑夜': 'https://files.catbox.moe/j6jg2j.jpg' },
-      '冬天霍格沃茨庭院':        'https://files.catbox.moe/gfosjh.jpg',
-      '扫帚间':        'https://files.catbox.moe/i3si4j.jpg',
-      '黑湖':       { '白天': 'https://files.catbox.moe/tkar0g.jpg', '黑夜': 'https://files.catbox.moe/t6l1nf.jpg' },
-      '霍格沃茨厨房':        'https://files.catbox.moe/b1phm0.jpg',
-      '海格小屋':       { '白天': 'https://files.catbox.moe/9bcd7d.jpg', '黑夜': 'https://files.catbox.moe/qig4hj.jpg' },
-      '海格小屋内部':        'https://files.catbox.moe/7kftjh.jpg',
-      '赫奇帕奇休息室':        'https://files.catbox.moe/0up8h0.jpg',
-      '赫奇帕奇宿舍':        'https://files.catbox.moe/2crmb4.jpg',
-      '校长办公室':        'https://files.catbox.moe/td9gpt.jpg',
-      '冬天打人柳':        'https://files.catbox.moe/l44a88.jpg',
-      '打人柳':       { '白天': 'https://files.catbox.moe/mnba3b.jpg', '黑夜': 'https://files.catbox.moe/mvemmm.jpg' },
-      '变形课教室':        'https://files.catbox.moe/8dtw9w.jpg',
-      '拉文克劳休息室':        'https://files.catbox.moe/aym707.jpg',
-      '盥洗室1':        'https://files.catbox.moe/xiarb2.jpg',
-      '盥洗室2':        'https://files.catbox.moe/gs58v0.jpg',
-      '霍格莫德车站':       { '白天': 'https://files.catbox.moe/1pbukv.jpg', '黑夜': 'https://files.catbox.moe/dyr23a.jpg' },
-      '魔法石房间':        'https://files.catbox.moe/uqogof.jpg',
-      '棋盘房间':        'https://files.catbox.moe/xlkcrj.jpg',
-      '小鸟钥匙':        'https://files.catbox.moe/tu1cju.jpg',
-      '魔鬼网':        'https://files.catbox.moe/1fa254.jpg',
-      '四楼房间（三头犬）':        'https://files.catbox.moe/7t92ug.jpg',
-      '霍格沃茨道路（有人）':        'https://files.catbox.moe/95ypcr.jpg',
-      '黑夜废弃教室（厄里斯魔镜）':        'https://files.catbox.moe/pbt5un.jpg',
-      '球场看台（斯莱特林）':        'https://files.catbox.moe/6kt6uc.jpg',
-      '球场看台（格兰芬多）':        'https://files.catbox.moe/kxgfyr.jpg',
-      '白天霍格沃茨大路':        'https://files.catbox.moe/gyqoch.jpg',
-      '校长办公室入口':        'https://files.catbox.moe/f4c3h6.jpg',
-      '大厅分院帽':        'https://files.catbox.moe/th18ac.jpg',
-      '大厅教师长桌':        'https://files.catbox.moe/3yonsl.jpg',
-      '霍格沃茨门厅':        'https://files.catbox.moe/ys4yaz.jpg',
-      '船屋':        'https://files.catbox.moe/pcymrt.jpg',
-      '密室管道':        'https://files.catbox.moe/8m5ny0.jpg',
-      '密室':        'https://files.catbox.moe/wm83eb.jpg',
+    const 背景表 = {
+      '卧室':       { '白天': 'https://files.catbox.moe/gpn9m2.png', '黑夜': 'https://files.catbox.moe/1ybtfp.png' },
+      '客厅沙发':   { '白天': 'https://files.catbox.moe/o9icrn.png', '黑夜': 'https://files.catbox.moe/npuuwa.png' },
+      '会议厅':     { '白天': 'https://files.catbox.moe/0734h2.png', '黑夜': 'https://files.catbox.moe/vxcbqx.png' },
+      '家里游戏间': { '白天': 'https://files.catbox.moe/8s8l32.png', '黑夜': 'https://files.catbox.moe/pg7im5.png' },
+      '花店':       { '白天': 'https://files.catbox.moe/5unsua.png', '黑夜': 'https://files.catbox.moe/19uhfm.png' },
+      '海边':       { '白天': 'https://files.catbox.moe/x98idk.png' },
+      '甜品屋':     { '白天': 'https://files.catbox.moe/tztf49.png' },
+      '教室':       { '白天': 'https://files.catbox.moe/hnj2ro.png' },
+      '商场':       { '白天': 'https://files.catbox.moe/zim84c.png' },
+      '地铁口':     { '白天': 'https://files.catbox.moe/lhbig7.png', '黑夜': 'https://files.catbox.moe/bqm0dc.png' },
+      '公园':       { '白天': 'https://files.catbox.moe/ep4scm.png', '黑夜': 'https://files.catbox.moe/utnywh.png' },
+      '电影院':      'https://files.catbox.moe/1073we.png',
+      '游乐园':      'https://files.catbox.moe/r0mun9.png',
+      '水族馆':      'https://files.catbox.moe/prxxag.jpeg',
+      '高级餐厅':    'https://files.catbox.moe/ckdidu.png',
+      '剧院':        'https://files.catbox.moe/2k90ck.png',
+      '教室':        'https://files.catbox.moe/xsozix.jpeg',
+      '学校走廊':    'https://files.catbox.moe/ck9jh1.png',
+      '冬日':        'https://files.catbox.moe/fnu2je.png',
+      'KTV':         'https://files.catbox.moe/0xgiz6.png',
+      '喷泉广场':   { '白天': 'https://files.catbox.moe/mw9kt5.png', '黑夜': 'https://files.catbox.moe/3p1uky.png' },
+      '下雨':       { '白天': 'https://files.catbox.moe/dh1lb3.png', '黑夜': 'https://files.catbox.moe/dsrjbj.png' },
+      '马路边':     { '白天': 'https://files.catbox.moe/oi050y.png', '黑夜': 'https://files.catbox.moe/v011q4.png' },
+      '夜晚户外':     'https://files.catbox.moe/fswgl4.png',
+      '白天户外':     'https://files.catbox.moe/d4u9g9.png',
+      // 万圣节背景：支持多备选，按会话稳定随机挑选
+      '万圣节':       [
+        'https://files.catbox.moe/qa16a7.png',
+        'https://files.catbox.moe/3xsgfb.png',
+        'https://files.catbox.moe/px9hb0.png'
+      ],
     };
 
     // 用法：背景URL('白天卧室') / 背景URL('卧室白天') / 背景URL('花店黑夜') / 背景URL('电影院') / 背景URL('gpn9m2')
@@ -3535,75 +3393,123 @@
     const SPRITE_SESSION_SALT = (Math.random().toString(36).slice(2)) + '-' + Date.now().toString(36);
     const SPRITE_SESSION_CACHE = Object.create(null); // key: 表情键 → 已选中的 URL 或短码
     const 立绘表 = {
-      // —— 一年级立绘 ——
-      '哈利Muggle clothes': 'https://files.catbox.moe/3yzrdb.png',
-      '哈利Quidditch robes': 'https://files.catbox.moe/btd724.png',
-      '哈利House robes': 'https://files.catbox.moe/5k8pqp.png',
-      '德拉科Muggle clothes': 'https://files.catbox.moe/3e0ikd.png',
-      '德拉科House robes': 'https://files.catbox.moe/m6o5wq.png',
-      '德拉科formal wear': 'https://files.catbox.moe/9of7mj.png',
-      '赫敏Muggle clothes': 'https://files.catbox.moe/x911cn.png',
-      '赫敏House robes': 'https://files.catbox.moe/jrfung.png',
-      '罗恩Muggle clothes': 'https://files.catbox.moe/jldal0.png',
-      '罗恩House robes': 'https://files.catbox.moe/7sfvrn.png',
-      '达力': 'https://files.catbox.moe/zed29a.png',
-      '珀西': 'https://files.catbox.moe/rkkm4h.png',
-      '弗雷德House robes': 'https://files.catbox.moe/h4wuhp.png',
-      '弗雷德Muggle clothes': 'https://files.catbox.moe/bljhga.png',
-      '乔治House robes': 'https://files.catbox.moe/8w60h8.png',
-      '乔治Muggle clothes': 'https://files.catbox.moe/9ynt7k.png',
-      '纳威': 'https://files.catbox.moe/qhq9jw.png',
-      '高尔': 'https://files.catbox.moe/ybsb9s.png',
-      '克拉布': 'https://files.catbox.moe/kmro3h.png',
-      '西莫': 'https://files.catbox.moe/f768lz.png',
-      '潘西·帕金森': 'https://files.catbox.moe/dc9qrl.png',
-      '伍德Muggle clothes': 'https://files.catbox.moe/wsiixh.png',
-      '伍德Quidditch robes': 'https://files.catbox.moe/3m5ygd.png',
-      '伍德House robes': 'https://files.catbox.moe/m02k7t.png',
-      '马库斯': 'https://files.catbox.moe/6znbq1.png',
-      '拉文德·布朗': 'https://files.catbox.moe/vjgojq.png',
-      '迪安': 'https://files.catbox.moe/xkbt5y.png',
-      '金妮Muggle clothes': 'https://files.catbox.moe/4qenm2.png',
-      '金妮House robes': 'https://files.catbox.moe/psg9fj.png',
-      '凯蒂': 'https://files.catbox.moe/l0ra8q.png',
-      '苏珊': 'https://files.catbox.moe/y06wk4.png',
-      // —— 其他角色 ——
-      '邓布利多': 'https://files.catbox.moe/96zqbq.png',
-      '海格': 'https://files.catbox.moe/6ugh3i.png',
-      '麦格': 'https://files.catbox.moe/h74mwp.png',
-      '德思礼': 'https://files.catbox.moe/ay0tko.png',
-      '佩妮': 'https://files.catbox.moe/wsku5g.png',
-      '奇洛': 'https://files.catbox.moe/ct5x08.png',
-      '奥利凡德': 'https://files.catbox.moe/4w5uew.png',
-      '分院帽': 'https://files.catbox.moe/7kg9rm.png',
-      '差点没头的尼克': 'https://files.catbox.moe/ioknmn.png',
-      '斯内普': 'https://files.catbox.moe/1yoe61.png',
-      '费尔奇': 'https://files.catbox.moe/108c21.png',
-      '皮皮鬼': 'https://files.catbox.moe/lcfob6.png',
-      '牙牙': 'https://files.catbox.moe/nvj34k.png',
-      '奇洛脑后的伏地魔': 'https://files.catbox.moe/f55ktr.png',
-      '霍琦女士': 'https://files.catbox.moe/f7houa.png',
-      '弗立维教授': 'https://files.catbox.moe/h5bdvn.png',
-      '庞弗雷女士': 'https://files.catbox.moe/rh92e8.png',
-      '平斯夫人': 'https://files.catbox.moe/54hc3v.png',
-      '宾斯教授': 'https://files.catbox.moe/tqsx3m.png',
-      '血人巴罗': 'https://files.catbox.moe/8ume1d.png',
-      '韦斯莱夫人': 'https://files.catbox.moe/3xfr9r.png',
-      '拉环': 'https://files.catbox.moe/j3pd24.png',
-      '斯普劳特': 'https://files.catbox.moe/tt3pj7.png',
-      '比尔': 'https://files.catbox.moe/zx5id8.png',
-      '福吉': 'https://files.catbox.moe/5z4v87.png',
-      // —— NPC立绘 ——
-      'NPC男学生': 'https://files.catbox.moe/th3cwe.png',
-      'NPC女学生': 'https://files.catbox.moe/hk10nu.png',
-      'NPC小女孩': 'https://files.catbox.moe/o4k9if.png',
-      'NPC小男孩': 'https://files.catbox.moe/urhe4r.png',
-      'NPC女': 'https://files.catbox.moe/1fbnzr.png',
-      'NPC男': 'https://files.catbox.moe/9jjmfq.png',
-      '妖精': 'https://files.catbox.moe/sg8ehb.png',
-      'NPC幽灵': 'https://files.catbox.moe/w8ktuq.png',
-      '猫': 'https://files.catbox.moe/rvx2fe.png',
-      '马人': 'https://files.catbox.moe/47xpbx.png',
+      '许魏洲万圣节': [
+        'https://files.catbox.moe/z3e8mt.png',
+        'https://files.catbox.moe/uin4ki.png',
+        'https://files.catbox.moe/9gqwdf.png',
+        'https://files.catbox.moe/3eq7tr.png',
+        'https://files.catbox.moe/phl5ms.png',
+        'https://files.catbox.moe/7jzmvh.png',
+        'https://files.catbox.moe/1e5v6s.png',
+        'https://files.catbox.moe/xkzl1h.png',
+        'https://files.catbox.moe/tqedpb.png',
+        'https://files.catbox.moe/3pdfhz.png',
+        'https://files.catbox.moe/wbx5zh.png'
+      ],
+      '许魏洲女仆装': [
+        'https://files.catbox.moe/fwm3kc.png',
+        'https://files.catbox.moe/ezmoak.png',
+        'https://files.catbox.moe/1sy219.png',
+        'https://files.catbox.moe/xlarb7.png',
+        'https://files.catbox.moe/8xbtqj.png',
+        'https://files.catbox.moe/z9grb1.png',
+        'https://files.catbox.moe/l5ece2.png',
+        'https://files.catbox.moe/cldfoz.png'
+      ],
+      '陈宵鸣万圣节': [
+        'https://files.catbox.moe/7qq2i9.png',
+        'https://files.catbox.moe/0k2rty.png',
+        'https://files.catbox.moe/i7jdk5.png',
+        'https://files.catbox.moe/q7oh6q.png',
+        'https://files.catbox.moe/jnztj8.png',
+        'https://files.catbox.moe/fqlehi.png'
+      ],
+      '陈宵鸣粉裙子': [
+        'https://files.catbox.moe/lddyge.png',
+        'https://files.catbox.moe/vj3yws.png',
+        'https://files.catbox.moe/w4xq6h.png',
+        'https://files.catbox.moe/spfvtt.png'
+      ],
+      '许魏洲admiration': 'https://files.catbox.moe/qnollb.png',
+      '许魏洲amusement': 'https://files.catbox.moe/zik4zg.png',
+      '许魏洲anger': 'https://files.catbox.moe/kplcoa.png',
+      '许魏洲annoyance': 'https://files.catbox.moe/wvvznu.png',
+      '许魏洲approval': 'https://files.catbox.moe/dh03oy.png',
+      '许魏洲caring': 'https://files.catbox.moe/6ncw0t.png',
+      '许魏洲curiosity': 'https://files.catbox.moe/1ieyik.png',
+      '许魏洲desire': 'https://files.catbox.moe/z3558d.png',
+      '许魏洲disappointment': 'https://files.catbox.moe/cmsvft.png',
+      '许魏洲disapproval': [
+        'https://files.catbox.moe/ommqrq.png',
+        'https://files.catbox.moe/sab2pu.png'
+      ],
+      '许魏洲disgust': 'https://files.catbox.moe/00jc25.png',
+      '许魏洲embarrassment': 'https://files.catbox.moe/j0t4sj.png',
+      '许魏洲excitement': 'https://files.catbox.moe/ycnbfy.png',
+      '许魏洲fear': 'https://files.catbox.moe/zhjhn5.png',
+      '许魏洲gratitude': 'https://files.catbox.moe/zn3gwm.png',
+      '许魏洲grief': 'https://files.catbox.moe/670dlh.png',
+      '许魏洲joy': 'https://files.catbox.moe/32nr34.png',
+      '许魏洲love-blush': 'https://files.catbox.moe/p5qba3.png',
+      '许魏洲nervousness': 'https://files.catbox.moe/8mblyg.png',
+      '许魏洲neutral': [
+        'https://files.catbox.moe/32nr34.png',
+        'https://files.catbox.moe/wbab1a.png'
+      ],
+      '许魏洲optimism': 'https://files.catbox.moe/ykaytc.png',
+      '许魏洲pride': 'https://files.catbox.moe/r889pd.png',
+      '许魏洲realization': 'https://files.catbox.moe/qrvt3c.png',
+      '许魏洲relief': 'https://files.catbox.moe/hl3pfn.png',
+      '许魏洲remorse': 'https://files.catbox.moe/cmjm1j.png',
+      '许魏洲sadness': 'https://files.catbox.moe/k5pz5r.png',
+      '许魏洲surprise': 'https://files.catbox.moe/jc0z6r.png',
+      // —— 路人立绘 ——
+      '路人男性': 'https://files.catbox.moe/ybiq5b.png',
+      '路人女性': 'https://files.catbox.moe/fjh1us.png',
+      // —— 陈宵鸣 ——
+      '陈宵鸣傻笑': [
+        'https://files.catbox.moe/22oycw.png',
+        'https://files.catbox.moe/jpnc2m.png',
+        'https://files.catbox.moe/lu221o.png',
+        'https://files.catbox.moe/1o7eo0.png',
+        'https://files.catbox.moe/j886ij.png'
+      ],
+      '陈宵鸣生气嘟嘴': 'https://files.catbox.moe/cay6l8.png',
+      '陈宵鸣生气闭嘴比耶': 'https://files.catbox.moe/k84f2o.png',
+      '陈宵鸣生气张嘴比耶': 'https://files.catbox.moe/vlh9gz.png',
+      '陈宵鸣疑惑': 'https://files.catbox.moe/vlh9gz.png',
+      '陈宵鸣生气嘟嘴比耶': 'https://files.catbox.moe/y68ykf.png',
+      '陈宵鸣说话': 'https://files.catbox.moe/3afx26.gif',
+
+      // —— NSFW许魏洲 ——
+      '许魏洲nude-amusement': 'https://files.catbox.moe/55yzlr.png',
+      '许魏洲nude-anger': 'https://files.catbox.moe/82osig.png',
+      '许魏洲nude-annoyance': 'https://files.catbox.moe/geaf9w.png',
+      '许魏洲nude-approval': 'https://files.catbox.moe/pal7ot.png',
+      '许魏洲nude-caring': 'https://files.catbox.moe/zd8v8h.png',
+      '许魏洲nude-confusion': 'https://files.catbox.moe/29p217.png',
+      '许魏洲nude-curiosity': 'https://files.catbox.moe/2jm5fm.png',
+      '许魏洲nude-desire': 'https://files.catbox.moe/8viyz7.png',
+      '许魏洲nude-disappointment': 'https://files.catbox.moe/mk6r9.png',
+      '许魏洲nude-disappoint': 'https://files.catbox.moe/mk6r9.png',
+      '许魏洲nude-disapproval': ['https://files.catbox.moe/j4ivac.png', 'https://files.catbox.moe/mmcqb6.png'],
+      '许魏洲nude-disgust': 'https://files.catbox.moe/beskyp.png',
+      '许魏洲nude-embarrassment': 'https://files.catbox.moe/kgrz9w.png',
+      '许魏洲nude-excitement': 'https://files.catbox.moe/1khxhg.png',
+      '许魏洲nude-fear': 'https://files.catbox.moe/8j4cvj.png',
+      '许魏洲nude-gratitude': 'https://files.catbox.moe/f5qv6b.png',
+      '许魏洲nude-grief': 'https://files.catbox.moe/d71eu3.png',
+      '许魏洲nude-joy': 'https://files.catbox.moe/tt45hw.png',
+      '许魏洲nude-love-blush': 'https://files.catbox.moe/31vuuy.png',
+      '许魏洲nude-nervousness': 'https://files.catbox.moe/s5hod1.png',
+      '许魏洲nude-neutral': ['https://files.catbox.moe/jehn03.png', 'https://files.catbox.moe/9ujkhc.png'],
+      '许魏洲nude-optimism': 'https://files.catbox.moe/rqnrxe.png',
+      '许魏洲nude-pride': 'https://files.catbox.moe/5wdble.png',
+      '许魏洲nude-realization': 'https://files.catbox.moe/3971y0.png',
+      '许魏洲nude-relief': 'https://files.catbox.moe/sn3br9.png',
+      '许魏洲nude-remorse': 'https://files.catbox.moe/huvl0p.png',
+      '许魏洲nude-sadness': 'https://files.catbox.moe/i6opfy.png',
+      '许魏洲nude-surprise': 'https://files.catbox.moe/nhtpzq.png'
     };
 
     // FNV-1a 哈希 + 稳定选择（同一场景索引得到同一个变体）
@@ -3652,57 +3558,86 @@
     const CG_SESSION_SALT = (Math.random().toString(36).slice(2)) + '-' + Date.now().toString(36);
     const CG_SESSION_CACHE = Object.create(null);
     const CG表 = {
-      // 一年级
-      '婴儿哈利在夜晚女贞路': ['https://files.catbox.moe/ppq63z.jpg'],
-      '哈利被关储物间': ['https://files.catbox.moe/eivcs4.jpg'],
-      '信涌进女贞路四号客厅': ['https://files.catbox.moe/tmjaqt.jpg'],
-      '爬虫馆巨蟒': ['https://files.catbox.moe/v0omty.jpg'],
-      '给哈利的蛋糕': ['https://files.catbox.moe/46r2qu.jpg'],
-      '达力的猪尾巴': ['https://files.catbox.moe/dm1hgt.jpg'],
-      '奥利凡德挑选魔杖': ['https://files.catbox.moe/22fond.jpg'],
-      '哈利在对角巷': ['https://files.catbox.moe/v06p0v.jpg'],
-      '哈利在破釜酒吧和别人握手': ['https://files.catbox.moe/urxwen.jpg'],
-      '古灵阁713地下金库': ['https://files.catbox.moe/poctzf.jpg'],
-      '哈利在车站': ['https://files.catbox.moe/ytesj4.jpg'],
-      '哈利在9¾站台': ['https://files.catbox.moe/7inc4w.jpg'],
-      '哈利在列车包厢露出伤疤': ['https://files.catbox.moe/4y5685.jpg'],
-      '赫敏在列车包厢门口': ['https://files.catbox.moe/4y5685.jpg'],
-      '德拉科戴分院帽': ['https://files.catbox.moe/5oxznw.jpg'],
-      '哈利戴分院帽': ['https://files.catbox.moe/1ll8kq.jpg'],
-      '马尔福在礼堂宴会': ['https://files.catbox.moe/qbgecv.jpg'],
-      '晚上哈利望向寝室窗外': ['https://files.catbox.moe/bj06f9.jpg'],
-      '记忆球': ['https://files.catbox.moe/dnhseh.jpg'],
-      '赫敏在室内': ['https://files.catbox.moe/j6x8vr.jpg'],
-      '马尔福在教室': ['https://files.catbox.moe/tmk897.jpg'],
-      '斯内普低头写字': ['https://files.catbox.moe/dfykj3.jpg'],
-      '纳威扫帚失控': ['https://files.catbox.moe/gtipzq.jpg'],
-      '马尔福空中扔记忆球': ['https://files.catbox.moe/m1cy3b.jpg'],
-      '伍德在室内': ['https://files.catbox.moe/9tv2ki.jpg'],
-      '醒着的路威': ['https://files.catbox.moe/lpebl6.jpg'],
-      '哈利在室外': ['https://files.catbox.moe/8edkyj.jpg'],
-      '伍德在草坪': ['https://files.catbox.moe/8wkzp4.jpg'],
-      '奇洛闯进礼堂': ['https://files.catbox.moe/zbs4gj.jpg'],
-      '室内巨怪': ['https://files.catbox.moe/zln9lw.jpg'],
-      '室内巨怪昏迷': ['https://files.catbox.moe/17qnyl.jpg'],
-      '哈利在礼堂': ['https://files.catbox.moe/4neq2a.jpg'],
-      '袍子着火': ['https://files.catbox.moe/1srg4o.jpg'],
-      '哈利扫帚失控': ['https://files.catbox.moe/dl76kh.jpg'],
-      '哈利吐出金色飞贼': ['https://files.catbox.moe/xuwcib.jpg'],
-      '哈利和罗恩下巫师棋': ['https://files.catbox.moe/9l5mt8.jpg'],
-      '德拉科球场看台失落捂脸': ['https://files.catbox.moe/ax6qj1.jpg'],
-      '哈利寝室穿隐身衣': ['https://files.catbox.moe/xs9xml.jpg'],
-      '厄里斯魔镜里的哈利一家人': ['https://files.catbox.moe/e8t5zy.jpg'],
-      '哈利冬天室外': ['https://files.catbox.moe/j5apcr.jpg'],
-      '德拉科偷看海格小屋': ['https://files.catbox.moe/k1szu4.jpg'],
-      '德拉科害怕': ['https://files.catbox.moe/06200o.jpg'],
-      '兜帽人喝独角兽的血': ['https://files.catbox.moe/9hrx6e.jpg'],
-      '哈利晚上侧身坐着': ['https://files.catbox.moe/f1u9zl.jpg'],
-      '罗恩受伤倒地': ['https://files.catbox.moe/wrm55z.jpg'],
-      '奇洛在地下房间': ['https://files.catbox.moe/nm3fhz.jpg'],
-      '哈利在医疗翼': ['https://files.catbox.moe/ygc9h6.jpg'],
-      '马尔福大厅宴会失落': ['https://files.catbox.moe/bbe066.jpg'],
-      '贴满哈利父母照片的书': ['https://files.catbox.moe/5uowad.jpg'],
-      '火龙诺伯': ['https://files.catbox.moe/5uowad.jpg'],
+      // 餐厅/电影院/海边等
+      '许魏洲在高级餐厅': ['https://files.catbox.moe/3w68lp.png', 'https://files.catbox.moe/yj7zq6.png', 'https://files.catbox.moe/pifeno.png', 'https://files.catbox.moe/rot7l7.png'],
+      '许魏洲在电影院': ['https://files.catbox.moe/8emuu7.png', 'https://files.catbox.moe/hbxdm3.png', 'https://files.catbox.moe/04nhsh.png', 'https://files.catbox.moe/tr5un8.png', 'https://files.catbox.moe/imggq0.png', 'https://files.catbox.moe/k5ddew.png'],
+      '许魏洲在海边冲浪': ['https://files.catbox.moe/a3v77g.png', 'https://files.catbox.moe/idthbp.png', 'https://files.catbox.moe/zzsnoe.png', 'https://files.catbox.moe/eyvsjb.png'],
+      '许魏洲给{{user}}喂甜品': ['https://files.catbox.moe/gh7fx0.png', 'https://files.catbox.moe/oq3q68.png', 'https://files.catbox.moe/fd3d5o.png'],
+      '许魏洲打游戏': ['https://files.catbox.moe/sj2y09.png', 'https://files.catbox.moe/qn13nu.png'],
+      '许魏洲在家打游戏（可爱版）': ['https://files.catbox.moe/b6fpjt.png', 'https://files.catbox.moe/rj39n7.png', 'https://files.catbox.moe/6m7jtv.png', 'https://files.catbox.moe/2mlz45.png', 'https://files.catbox.moe/h91f59.png', 'https://files.catbox.moe/vrpcej.png'],
+      '许魏洲冬天挑礼物': ['https://files.catbox.moe/q5rkt2.png', 'https://files.catbox.moe/y606p9.png', 'https://files.catbox.moe/tbye7o.png', 'https://files.catbox.moe/9mnucl.png', 'https://files.catbox.moe/bvbzyo.png', 'https://files.catbox.moe/b2070x.png', 'https://files.catbox.moe/fqptr7.png', 'https://files.catbox.moe/q2ah54.png', 'https://files.catbox.moe/lqrugh.png'],
+      '许魏洲冬天逛街': ['https://files.catbox.moe/wbvv0t.png', 'https://files.catbox.moe/51be7f.png', 'https://files.catbox.moe/2cbojm.png'],
+      '许魏洲在动物园': ['https://files.catbox.moe/maqp1a.png', 'https://files.catbox.moe/2bdmo2.png', 'https://files.catbox.moe/gw7e0u.png', 'https://files.catbox.moe/s3he7n.png'],
+      '许魏洲在赌场': ['https://files.catbox.moe/vgbt1f.png', 'https://files.catbox.moe/q40khn.png', 'https://files.catbox.moe/qfmw12.png', 'https://files.catbox.moe/hfjfk3.png', 'https://files.catbox.moe/tx2boh.png'],
+      '许魏洲刚睡醒': ['https://files.catbox.moe/k8a89v.png', 'https://files.catbox.moe/7yx0bs.png', 'https://files.catbox.moe/326hnr.png'],
+      '许魏洲端咖啡': ['https://files.catbox.moe/3cvooo.png'],
+      '许魏洲在古代穿盔甲': ['https://files.catbox.moe/eidl3s.png', 'https://files.catbox.moe/g0bxhq.png', 'https://files.catbox.moe/h07esu.png', 'https://files.catbox.moe/tdafim.png', 'https://files.catbox.moe/vhyc9q.png', 'https://files.catbox.moe/gu4sjo.png', 'https://files.catbox.moe/0lj4fv.png', 'https://files.catbox.moe/dghax7.png', 'https://files.catbox.moe/zpk44h.png', 'https://files.catbox.moe/3ickno.png', 'https://files.catbox.moe/3wjg5z.png', 'https://files.catbox.moe/m8pe6v.png', 'https://files.catbox.moe/hggdbd.png', 'https://files.catbox.moe/a606mv.png', 'https://files.catbox.moe/ig1bli.png', 'https://files.catbox.moe/pyzxa9.png'],
+      '许魏洲在白天花店': ['https://files.catbox.moe/rdy0bc.png', 'https://files.catbox.moe/8zx95g.png', 'https://files.catbox.moe/vdipfu.png', 'https://files.catbox.moe/smzqkd.png', 'https://files.catbox.moe/pb3rvs.png'],
+      '许魏洲在夜晚花店': ['https://files.catbox.moe/zjdb65.png', 'https://files.catbox.moe/c2gsbv.png', 'https://files.catbox.moe/js9uk2.png'],
+      '许魏洲白天逛街': ['https://files.catbox.moe/hqu7hs.png', 'https://files.catbox.moe/cxxcw3.png', 'https://files.catbox.moe/3emym7.png'],
+      '许魏洲喝酒': ['https://files.catbox.moe/jcmnqk.png', 'https://files.catbox.moe/pejqac.png', 'https://files.catbox.moe/55vz2s.png', 'https://files.catbox.moe/acb791.png'],
+      '许魏洲绘画': ['https://files.catbox.moe/1uz6rn.png', 'https://files.catbox.moe/611rbs.png', 'https://files.catbox.moe/00nz6h.png', 'https://files.catbox.moe/0jpt8s.png'],
+      '许魏洲在火车站离别': ['https://files.catbox.moe/5o8p23.png', 'https://files.catbox.moe/dh9614.png', 'https://files.catbox.moe/d9z1sk.png', 'https://files.catbox.moe/m89j7g.png'],
+      '许魏洲比心': ['https://files.catbox.moe/2fldne.png', 'https://files.catbox.moe/jeet4t.png'],
+      '许魏洲在街头弹吉他/唱情歌': ['https://files.catbox.moe/1rnh5c.png', 'https://files.catbox.moe/w2g3wz.png', 'https://files.catbox.moe/m1ajqv.png'],
+      '许魏洲看书': ['https://files.catbox.moe/tu6wmr.png', 'https://files.catbox.moe/8ht5hc.png'],
+      '许魏洲在摩天轮': ['https://files.catbox.moe/zbtqpu.png', 'https://files.catbox.moe/7vkgzv.png', 'https://files.catbox.moe/7wlk7r.png'],
+      '许魏洲有猫耳': ['https://files.catbox.moe/y7db54.png','https://files.catbox.moe/g27q6m.png','https://files.catbox.moe/u9kzh7.png','https://files.catbox.moe/ynntda.png','https://files.catbox.moe/9ohfc6.png','https://files.catbox.moe/s2oa3m.png','https://files.catbox.moe/9ytldj.png','https://files.catbox.moe/wcqigm.png','https://files.catbox.moe/bowt7p.png','https://files.catbox.moe/xmp8te.png','https://files.catbox.moe/dgdfh9.png','https://files.catbox.moe/xyu7l9.png','https://files.catbox.moe/ohrap7.png','https://files.catbox.moe/qu3zxw.png','https://files.catbox.moe/wynwkm.png','https://files.catbox.moe/ifjqpk.png','https://files.catbox.moe/1m06ls.png','https://files.catbox.moe/5r12n2.png','https://files.catbox.moe/dvyu9o.png','https://files.catbox.moe/ccxtip.png','https://files.catbox.moe/25ac97.png','https://files.catbox.moe/ea54hy.png','https://files.catbox.moe/9u6qo9.png','https://files.catbox.moe/a6l7vf.png','https://files.catbox.moe/8yrfk9.png'],
+      '许魏洲有猫耳在植物园': ['https://files.catbox.moe/ymcch5.png', 'https://files.catbox.moe/ktcixs.png', 'https://files.catbox.moe/0n7c3h.png'],
+      '许魏洲爬山散步': ['https://files.catbox.moe/q6399n.png', 'https://files.catbox.moe/0p95al.png', 'https://files.catbox.moe/nsit5v.png', 'https://files.catbox.moe/9pat9e.png'],
+      '许魏洲泡温泉': ['https://files.catbox.moe/be8vag.png', 'https://files.catbox.moe/wfj2m5.png', 'https://files.catbox.moe/0gmcwy.png', 'https://files.catbox.moe/e71auy.png', 'https://files.catbox.moe/hhrn4q.png'],
+      '许魏洲冬日/捧着小雪人': ['https://files.catbox.moe/hel6y4.png'],
+      '许魏洲清晨散步': ['https://files.catbox.moe/y3femp.png', 'https://files.catbox.moe/b20b1y.png'],
+      '秋天的许魏洲': ['https://files.catbox.moe/jxc73c.png', 'https://files.catbox.moe/mnac5r.png', 'https://files.catbox.moe/9ajw5t.png', 'https://files.catbox.moe/v4i5q8.png'],
+      '许魏洲骑自行车': ['https://files.catbox.moe/hqotwc.png', 'https://files.catbox.moe/u2quzg.png', 'https://files.catbox.moe/4e5t68.png', 'https://files.catbox.moe/a6r0dj.png'],
+      '许魏洲赏樱': ['https://files.catbox.moe/2iftmv.png', 'https://files.catbox.moe/m7diph.png', 'https://files.catbox.moe/svogq0.png', 'https://files.catbox.moe/8jcol7.png'],
+      '许魏洲摇滚/重金属': ['https://files.catbox.moe/0z25us.png','https://files.catbox.moe/g6470c.png','https://files.catbox.moe/ip72c4.png','https://files.catbox.moe/b84yk2.png','https://files.catbox.moe/41ruoh.png','https://files.catbox.moe/fodxzo.png','https://files.catbox.moe/6n5ksj.png','https://files.catbox.moe/z6eow6.png','https://files.catbox.moe/tbqope.png','https://files.catbox.moe/1b06rs.png','https://files.catbox.moe/e76s5r.png','https://files.catbox.moe/s1g8nf.png','https://files.catbox.moe/f0hm6q.png','https://files.catbox.moe/7eb28j.png','https://files.catbox.moe/rhqowq.png','https://files.catbox.moe/vda9kz.png','https://files.catbox.moe/0nnmmd.png','https://files.catbox.moe/7w8x0w.png','https://files.catbox.moe/3ksl54.png','https://files.catbox.moe/42ycsf.png','https://files.catbox.moe/dqjk0c.png','https://files.catbox.moe/szyl97.png','https://files.catbox.moe/gpnhxe.png'],
+      '许魏洲水族馆': ['https://files.catbox.moe/mxae2y.png', 'https://files.catbox.moe/hmwn4x.png', 'https://files.catbox.moe/zud1zh.png', 'https://files.catbox.moe/d2xbjy.png', 'https://files.catbox.moe/t6xiw9.png'],
+      '许魏洲在听歌': ['https://files.catbox.moe/8qoy16.png', 'https://files.catbox.moe/jopibu.png'],
+      '许魏洲晚上看星星/聊天': ['https://files.catbox.moe/4w0yaf.png', 'https://files.catbox.moe/0mi9wf.png', 'https://files.catbox.moe/euc4sk.png', 'https://files.catbox.moe/nowa8j.png', 'https://files.catbox.moe/mqvfg7.png'],
+      '许魏洲屋顶看日出': ['https://files.catbox.moe/tbwosl.png', 'https://files.catbox.moe/p4k242.png', 'https://files.catbox.moe/jgsbvo.png', 'https://files.catbox.moe/f4yvcp.png'],
+      '许魏洲夕阳海边散步': ['https://files.catbox.moe/5yb2fq.png', 'https://files.catbox.moe/7pxmlv.png'],
+      '许魏洲下厨': ['https://files.catbox.moe/6ne1i3.png', 'https://files.catbox.moe/zm7qem.png', 'https://files.catbox.moe/a11l0f.png', 'https://files.catbox.moe/rrer1f.png', 'https://files.catbox.moe/ajk285.png'],
+      '许魏洲穿校服': ['https://files.catbox.moe/0l81k1.png','https://files.catbox.moe/l7rbqa.png','https://files.catbox.moe/ib36qu.png','https://files.catbox.moe/gji1gk.png','https://files.catbox.moe/2mx9i3.png','https://files.catbox.moe/zylkuh.png','https://files.catbox.moe/3dv87t.png','https://files.catbox.moe/4umt6b.png','https://files.catbox.moe/oq8385.png'],
+      '许魏洲写东西': ['https://files.catbox.moe/okou9a.png', 'https://files.catbox.moe/9mjx1j.png', 'https://files.catbox.moe/nxyl0m.png', 'https://files.catbox.moe/jiuji0.png'],
+      '许魏洲穿校服看书': ['https://files.catbox.moe/ur12pq.png','https://files.catbox.moe/0cmjhd.png','https://files.catbox.moe/nvj24l.png','https://files.catbox.moe/qfecyr.png','https://files.catbox.moe/bo4xcv.png','https://files.catbox.moe/xnuckn.png','https://files.catbox.moe/jga2mw.png','https://files.catbox.moe/lt1chh.png','https://files.catbox.moe/xcqslj.png'],
+      '许魏洲穿校服变魔术': ['https://files.catbox.moe/74k7rd.png', 'https://files.catbox.moe/635w2t.png'],
+      '许魏洲穿校服喂Pockey': ['https://files.catbox.moe/19pfum.png', 'https://files.catbox.moe/1l2goy.png', 'https://files.catbox.moe/daoje5.png', 'https://files.catbox.moe/6jboa3.png'],
+      '许魏洲（校服）拜托手势': ['https://files.catbox.moe/hu8d78.png'],
+      '许魏洲（校服）讲秘密': ['https://files.catbox.moe/wm4gcd.png', 'https://files.catbox.moe/hkfzgz.png', 'https://files.catbox.moe/ruvxpu.png'],
+      '许魏洲野餐': ['https://files.catbox.moe/ge3smp.png', 'https://files.catbox.moe/bjc65c.png', 'https://files.catbox.moe/yxofjl.png'],
+      '许魏洲夜市逛街': ['https://files.catbox.moe/va0knn.png', 'https://files.catbox.moe/4lo3sp.png', 'https://files.catbox.moe/d7658s.png'],
+      '许魏洲在艺术展/画展': ['https://files.catbox.moe/fz8lyd.png', 'https://files.catbox.moe/k8kpn0.png', 'https://files.catbox.moe/sb19c5.png'],
+      '许魏洲在游乐园': ['https://files.catbox.moe/shc6x3.png','https://files.catbox.moe/gbp5rm.png','https://files.catbox.moe/nxz2fx.png','https://files.catbox.moe/59haap.png','https://files.catbox.moe/qf8oz2.png','https://files.catbox.moe/zgxdq9.png','https://files.catbox.moe/ki39ui.png'],
+      '许魏洲雨天打伞': ['https://files.catbox.moe/m9bu2b.png', 'https://files.catbox.moe/m9bu2b.png'],
+      '许魏洲做早餐/穿居家服': ['https://files.catbox.moe/u2ogs1.png', 'https://files.catbox.moe/l5shjo.png'],
+      '许魏洲在篝火晚会': ['https://files.catbox.moe/on9ev1.png', 'https://files.catbox.moe/fcbtem.png', 'https://files.catbox.moe/dba25w.png', 'https://files.catbox.moe/8y0x7c.png', 'https://files.catbox.moe/mz2yqn.png'],
+      '许魏洲手指比枪': ['https://files.catbox.moe/nkl0j9.png'],
+      '许魏洲在古代/汉服': ['https://files.catbox.moe/68gv72.png','https://files.catbox.moe/va6bsz.png','https://files.catbox.moe/aeoemz.png','https://files.catbox.moe/0yy714.png','https://files.catbox.moe/ybfitm.png','https://files.catbox.moe/vmcj5n.png','https://files.catbox.moe/yyzb02.png','https://files.catbox.moe/xcyrwk.png','https://files.catbox.moe/wk44zk.png'],
+      '许魏洲哭泣': ['https://files.catbox.moe/q1i3rg.png', 'https://files.catbox.moe/gmtgvn.png', 'https://files.catbox.moe/qk69i3.png', 'https://files.catbox.moe/ws4cxa.png'],
+      '许魏洲害羞': ['https://files.catbox.moe/4wpvfa.png', 'https://files.catbox.moe/5llr2i.png', 'https://files.catbox.moe/tzm7ab.png', 'https://files.catbox.moe/6qhi5c.png'],
+      '许魏洲温柔的笑': ['https://files.catbox.moe/jho3ca.png', 'https://files.catbox.moe/dqsqos.png', 'https://files.catbox.moe/2jnxo5.png', 'https://files.catbox.moe/vl6axx.png', 'https://files.catbox.moe/fdmyo4.png'],
+      '许魏洲突然凑近/亲亲结束': ['https://files.catbox.moe/iv0rtz.png','https://files.catbox.moe/y75mqw.png','https://files.catbox.moe/c4t35t.png','https://files.catbox.moe/k7xc8h.png','https://files.catbox.moe/3fvuz9.png'],
+      '许魏洲看电视': ['https://files.catbox.moe/vfavkt.png', 'https://files.catbox.moe/bjkrzl.png', 'https://files.catbox.moe/y5j1m0.png'],
+      '许魏洲沙发上抱着玩偶': ['https://files.catbox.moe/5lgwrc.png', 'https://files.catbox.moe/h730ie.png', 'https://files.catbox.moe/l66zhb.png'],
+      '许魏洲商场拿着玩偶': ['https://files.catbox.moe/khbe57.png','https://files.catbox.moe/jk4huq.png','https://files.catbox.moe/u5vddy.png','https://files.catbox.moe/0k0v72.png','https://files.catbox.moe/wmdgyx.png'],
+      '许魏洲在商场推手推车': ['https://files.catbox.moe/gc6mvw.png','https://files.catbox.moe/z38yqm.png','https://files.catbox.moe/l8v39h.png','https://files.catbox.moe/fod6t1.png','https://files.catbox.moe/92aumh.png','https://files.catbox.moe/x8zl2j.png']
+      ,
+      // —— 通用（支持 {{char}} / {{user}} 占位） ——
+      '{{char}}被绑着': ['https://files.catbox.moe/bkbnch.png','https://files.catbox.moe/6u5kmj.png'],
+      '{{char}}穿女仆装': ['https://files.catbox.moe/s18mc0.png','https://files.catbox.moe/3vra1d.png','https://files.catbox.moe/g9d9sr.png'],
+      '{{char}}穿女仆装射精': ['https://files.catbox.moe/dmkesj.png','https://files.catbox.moe/cbqh0x.png'],
+      '{{char}}在洗澡': ['https://files.catbox.moe/6hyb1t.png','https://files.catbox.moe/k03lme.png','https://files.catbox.moe/r0tqzk.png'],
+      '{{char}}在做爱（前戏）时坏笑': ['https://files.catbox.moe/o8ig64.png','https://files.catbox.moe/gdi3sl.png','https://files.catbox.moe/tredj4.png','https://files.catbox.moe/o6a3ty.png','https://files.catbox.moe/xbybr8.png'],
+      '{{char}}穿西装': ['https://files.catbox.moe/bka20v.png','https://files.catbox.moe/r7sw3p.png','https://files.catbox.moe/fcszfq.png'],
+      '{{char}}被摸奶子': ['https://files.catbox.moe/4578ox.png'],
+      '{{char}}做爱/{{char}}后入{{user}}': ['https://files.catbox.moe/2zxcla.png','https://files.catbox.moe/lbccla.png','https://files.catbox.moe/ixt6rd.png'],
+      '{{char}}穿西装打{{user}}屁股': ['https://files.catbox.moe/mv0twl.png','https://files.catbox.moe/r1frxj.png'],
+      '{{char}}（光着身子）脸红喘气': ['https://files.catbox.moe/hvgxz7.png','https://files.catbox.moe/goi49h.png','https://files.catbox.moe/x4tzbl.png','https://files.catbox.moe/kjpx74.png'],
+      '{{char}}拿着小玩具': ['https://files.catbox.moe/x2n1kr.png','https://files.catbox.moe/ya5ayu.png','https://files.catbox.moe/3aat8n.png','https://files.catbox.moe/f7phfc.png','https://files.catbox.moe/qtt6je.png','https://files.catbox.moe/gpiioo.png','https://files.catbox.moe/ur9mcy.png'],
+      '{{char}}后入打{{user}}屁股': ['https://files.catbox.moe/ivdc89.png','https://files.catbox.moe/41j0yb.png','https://files.catbox.moe/4wiupz.png','https://files.catbox.moe/q7sxke.png','https://files.catbox.moe/xzvtgx.png','https://files.catbox.moe/13rv9z.png','https://files.catbox.moe/ni6c6o.png'],
+      '{{char}}（穿着衣服）自慰': ['https://files.catbox.moe/ni6c6o.png','https://files.catbox.moe/ex5rpk.png','https://files.catbox.moe/f8mbxt.png','https://files.catbox.moe/b8tm9b.png'],
+      '{{char}}（光着身子）自慰': ['https://files.catbox.moe/cqumzy.png','https://files.catbox.moe/63g5n5.png','https://files.catbox.moe/so3ocd.png','https://files.catbox.moe/1pgjda.png']
     };
 
     // 将带“/”或“／”的键拆成多个同义键，便于用任一别名触发同一组CG
@@ -8281,322 +8216,5 @@
       } catch {
         return fallback;
       }
-    }</script><script defer="defer" src="main.33348cd273a9f22c79bd.js"></script><script defer="defer" src="main.33348cd273a9f22c79bd.js"></script><script defer="defer" src="main.33348cd273a9f22c79bd.js"></script><style>/*全屏无黑边*/body.vn-fullscreen-mode #responsive-container{width:100vw!important;height:100vh!important;max-width:none!important;border:none!important;border-radius:0!important;margin:0!important;box-shadow:none!important}/*防盗图:禁止长按右键拖拽*/img{-webkit-touch-callout:none!important;-webkit-user-select:none!important;user-select:none!important;-webkit-user-drag:none!important;pointer-events:auto!important}div{-webkit-tap-highlight-color:transparent!important}/*全屏按钮样式*/#fullscreen-toggle-btn .icon-exit{display:none}#fullscreen-toggle-btn.is-active .icon-exit{display:block}#fullscreen-toggle-btn.is-active .icon-enter{display:none}/*布局修复*/#control-bar .control-group{max-width:none!important;flex-wrap:nowrap!important}#control-bar{max-width:100%;overflow-x:auto}#control-bar::-webkit-scrollbar{display:none}</style><script>document.addEventListener('DOMContentLoaded',()=>{/*防盗:禁右键*/document.addEventListener('contextmenu',e=>{if(e.target.tagName==='IMG'||e.target.closest('.cg-overlay-content')||e.target.closest('#cg-list')){e.preventDefault();e.stopPropagation()}},{passive:false});/*界面按钮逻辑*/const g=document.getElementById('control-group');if(!g)return;const b=document.createElement('button');b.id='fullscreen-toggle-btn';b.title='进入全屏';/*图标:进入(向外扩)和退出(向内收)*/b.innerHTML='<span class=\"icon-enter\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"128\" height=\"128\" viewBox=\"0 0 24 24\"><path fill=\"currentColor\" d=\"M5 5h5v2H7v3H5V5zm5 14H5v-5h2v3h3v2zm9-5h2v5h-5v-2h3v-3zm-2-9h5v5h-2V7h-3V5z\"/></svg></span><span class=\"icon-exit\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"128\" height=\"128\" viewBox=\"0 0 24 24\"><path fill=\"currentColor\" d=\"M10 17H7v-2h5v5h-2v-3zm-3-5V7h2v3h3v2H7zm10 0h-5V7h2v3h3v2zm-2 5v3h-2v-5h5v2h-3z\"/></svg></span>';/*点击:切换全屏状态*/b.addEventListener('click',e=>{e.stopPropagation();if(!document.fullscreenElement){document.documentElement.requestFullscreen().catch(()=>{})}else{if(document.exitFullscreen)document.exitFullscreen()}});g.insertBefore(b,g.firstChild);/*监听状态变化切换图标*/document.addEventListener('fullscreenchange',()=>{if(document.fullscreenElement){document.body.classList.add('vn-fullscreen-mode');b.classList.add('is-active');b.title='退出全屏'}else{document.body.classList.remove('vn-fullscreen-mode');b.classList.remove('is-active');b.title='进入全屏'}})});</script>
-<script>document.addEventListener("DOMContentLoaded",function(){setTimeout(function(){var h=document.querySelector("#cg-gallery h3");if(h){var b=document.createElement("button");b.innerText="🗑️ 清空";b.style.cssText="float:right;font-size:13px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.3);color:inherit;border-radius:6px;cursor:pointer;padding:4px 8px;margin-top:-2px;";b.onclick=function(){if(confirm("确定要清空所有已解锁的CG吗？此操作无法撤销。")){localStorage.removeItem("vn.cgUnlocked");location.reload()}};h.appendChild(b)}},1000)});</script><!-- === 终极视觉小说系统 (分段 1/3：样式与基础) === -->
-<style>
-  /* 立绘容器基础样式 */
-  .vn-sprite-slot {
-    position: absolute;
-    bottom: 0;
-    max-height: 100%;
-    max-width: 85%;
-    /* 平滑过渡：透明度和滤镜 */
-    transition: opacity 0.3s ease, filter 0.3s ease, transform 0s;
-    pointer-events: none;
-    transform-origin: bottom center;
-  }
-  /* 活跃状态：高亮、层级高、微微放大 */
-  .vn-sprite-active {
-    filter: brightness(1.05) grayscale(0);
-    z-index: 10;
-    transform: scale(1.02);
-  }
-  /* 非活跃状态：变暗、层级低 */
-  .vn-sprite-inactive {
-    filter: brightness(0.5) grayscale(0.1);
-    z-index: 5;
-  }
-  /* 普通状态（单人模式用）：无滤镜 */
-  .vn-sprite-normal {
-    filter: none;
-    z-index: 10;
-  }
-</style>
-
-<script>
-(function() {
-  // 1. 初始化舞台结构
-  // 把原来的单个立绘位置，改造成两个固定槽位 (Slot 1 和 Slot 2)
-  var layer = document.getElementById('character-layer');
-  if (layer) {
-    layer.innerHTML = ''; // 清空原有内容
-    var s1 = document.createElement('img');
-    s1.id = 'char-slot-1';
-    s1.className = 'vn-sprite-slot';
-    layer.appendChild(s1);
-
-    var s2 = document.createElement('img');
-    s2.id = 'char-slot-2';
-    s2.className = 'vn-sprite-slot';
-    layer.appendChild(s2);
-  }
-
-  // 2. 配置与状态变量
-  var KEY = 'vn.spriteSystem_v3';
-  // 默认配置
-  var cfg = {
-    dualMode: true, // 核心开关：默认开启双人模式
-    dual: {
-      s1: { x: -250, y: 0, s: 1 }, // 左位默认参数
-      s2: { x: 250, y: 0, s: 1 }   // 右位默认参数
-    },
-    single: { x: 0, y: 0, s: 1 },  // 单人模式默认居中
-    activeTab: 'slot1'
-  };
-  // 读取本地存储
-  try {
-    var saved = JSON.parse(localStorage.getItem(KEY));
-    if (saved) {
-      // 简单的浅合并
-      if (saved.dualMode !== undefined) cfg.dualMode = saved.dualMode;
-      if (saved.dual) cfg.dual = saved.dual;
-      if (saved.single) cfg.single = saved.single;
-    }
-  } catch (e) {}
-
-  // 运行时状态记录
-  var state = { activeSlot: 1, slot1Key: null, slot2Key: null };
-// (第一段结束，请继续复制第二段)
-  // === 分段 2/3：核心逻辑函数 ===
-
-  // 3. 渲染逻辑 (双模式分流)
-  window.applySpriteForScene = function(scene) {
-    var raw = scene.sprite;
-
-    // undefined: 这一行没有立绘指令 -> 保持画面，仅更新说话人高亮
-    if (raw === undefined) {
-      if (cfg.dualMode) updateDimming(scene.speaker);
-      return;
-    }
-
-    // null: 脚本明确要求清空立绘 -> 隐藏所有
-    if (raw === null) {
-      fadeOut(1); fadeOut(2);
-      state.slot1Key = null; state.slot2Key = null;
-      return;
-    }
-
-    // 解析立绘链接 (兼容旧代码逻辑)
-    var url = '';
-    if (window.立绘URL) url = window.立绘URL(raw, scene.index || 0);
-    // 兜底：如果是文件名则拼接链接
-    if (!url) url = (raw.includes('/') ? raw : 'https://files.catbox.moe/' + raw + '.png');
-
-    // === 核心分支 ===
-    if (!cfg.dualMode) {
-      // --- 单人模式 ---
-      // 强制使用 Slot 1，隐藏 Slot 2
-      fadeIn(1, url);
-      fadeOut(2);
-      // 清除可能残留的双人模式滤镜
-      var el = document.getElementById('char-slot-1');
-      if (el) el.className = 'vn-sprite-slot vn-sprite-normal';
-      // 重置状态
-      state.slot1Key = url; state.slot2Key = null;
-    } else {
-      // --- 双人模式 ---
-      // 检查：该角色是否已在台上？
-      if (state.slot1Key === url) {
-        state.activeSlot = 1;
-        updateDimming(scene.speaker);
-      } else if (state.slot2Key === url) {
-        state.activeSlot = 2;
-        updateDimming(scene.speaker);
-      } else {
-        // 新角色登场：顶替掉当前“非焦点”的那个位置
-        var target = (state.activeSlot === 1) ? 2 : 1;
-        // 如果有空位，优先填空位
-        if (!state.slot1Key) target = 1;
-        else if (!state.slot2Key) target = 2; // 修正逻辑：优先填空
-
-        fadeIn(target, url);
-        state.activeSlot = target;
-        // 更新记录
-        if (target === 1) state.slot1Key = url; else state.slot2Key = url;
-        updateDimming(scene.speaker);
-      }
-    }
-  };
-
-  // 辅助函数：显示图片
-  function fadeIn(idx, url) {
-    var img = document.getElementById('char-slot-' + idx);
-    if (!img) return;
-    // 如果图片完全没变且已显示，直接跳过
-    if (img.dataset.src === url && img.style.opacity === '1') return;
-
-    img.style.opacity = '0';
-    img.src = url;
-    img.dataset.src = url;
-    img.onload = function() {
-      img.style.opacity = '1';
-      window.updateSpritePositions(); // 确保位置正确
-    };
-  }
-
-  // 辅助函数：隐藏图片
-  function fadeOut(idx) {
-    var img = document.getElementById('char-slot-' + idx);
-    if (img) {
-      img.style.opacity = '0';
-      img.dataset.src = '';
-    }
-  }
-
-  // 辅助函数：更新高亮 (仅双人模式有效)
-  function updateDimming(speaker) {
-    if (!cfg.dualMode) return;
-    var s1 = document.getElementById('char-slot-1');
-    var s2 = document.getElementById('char-slot-2');
-    if (state.activeSlot === 1) { hl(s1, 1); hl(s2, 0); }
-    else { hl(s1, 0); hl(s2, 1); }
-  }
-
-  function hl(el, on) {
-    if (!el) return;
-    if (on) {
-      el.classList.remove('vn-sprite-inactive');
-      el.classList.add('vn-sprite-active');
-    } else {
-      el.classList.remove('vn-sprite-active');
-      el.classList.add('vn-sprite-inactive');
-    }
-  }
-
-  // 4. 位置应用引擎
-  window.updateSpritePositions = function() {
-    var s1 = document.getElementById('char-slot-1');
-    var s2 = document.getElementById('char-slot-2');
-
-    if (!cfg.dualMode) {
-      // 单人模式：应用 single 配置
-      if (s1) s1.style.transform = 'translateX(calc(-50% + ' + cfg.single.x + 'px)) translateY(' + cfg.single.y + 'px) scale(' + cfg.single.s + ')';
-      if (s2) s2.style.visibility = 'hidden'; // 强制隐藏右位
-    } else {
-      // 双人模式：应用 dual 配置
-      if (s1) {
-        s1.style.visibility = 'visible';
-        s1.style.transform = 'translateX(calc(-50% + ' + cfg.dual.s1.x + 'px)) translateY(' + cfg.dual.s1.y + 'px) scale(' + cfg.dual.s1.s + ')';
-      }
-      if (s2) {
-        s2.style.visibility = 'visible';
-        s2.style.transform = 'translateX(calc(-50% + ' + cfg.dual.s2.x + 'px)) translateY(' + cfg.dual.s2.y + 'px) scale(' + cfg.dual.s2.s + ')';
-      }
-    }
-  };
-// (第二段结束，请继续复制第三段)
-  // === 分段 3/3：界面与交互 ===
-
-  // 5. 构建 UI
-  setTimeout(function() {
-    // 清理旧按钮
-    var oldB = document.getElementById('dual-adj-btn'); if(oldB) oldB.remove();
-    var oldP = document.getElementById('dual-adj-panel'); if(oldP) oldP.remove();
-
-    var gr = document.querySelector('#control-bar .control-group');
-    if (!gr) return; // 没找到控制栏则退出
-
-    // 创建按钮
-    var btn = document.createElement('button');
-    btn.id = 'dual-adj-btn';
-    btn.title = '立绘设置';
-    btn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M12 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8zm-6 8a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V12z"/></svg>';
-    var ref = document.getElementById('auto-toggle');
-    if (ref) gr.insertBefore(btn, ref); else gr.appendChild(btn);
-
-    // 创建面板
-    var p = document.createElement('div');
-    p.id = 'dual-adj-panel';
-    p.style.cssText = 'position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);width:300px;padding:20px;border-radius:16px;background:var(--panel-bg);color:var(--panel-text-color);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.15);box-shadow:0 30px 60px rgba(0,0,0,0.6);z-index:10000;display:none;flex-direction:column;gap:15px;font-size:14px;';
-
-    p.innerHTML = `
-      <div style="display:flex;justify-content:space-between;align-items:center;">
-        <strong style="font-size:16px;">立绘设置</strong>
-        <span id="ds-close" style="cursor:pointer;font-size:20px;">×</span>
-      </div>
-      <label style="background:rgba(255,255,255,0.1);padding:10px;border-radius:10px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;">
-        <span>开启双人演出模式</span>
-        <input type="checkbox" id="ds-mode-toggle" style="width:20px;height:20px;accent-color:#165dff;">
-      </label>
-      <div id="ds-tabs" style="display:flex;background:rgba(255,255,255,0.08);border-radius:8px;padding:2px;">
-        <div id="t-s1" style="flex:1;text-align:center;padding:6px;cursor:pointer;border-radius:6px;">左位</div>
-        <div id="t-s2" style="flex:1;text-align:center;padding:6px;cursor:pointer;border-radius:6px;opacity:0.5;">右位</div>
-      </div>
-      <div id="ds-single-label" style="text-align:center;opacity:0.7;font-size:12px;display:none;">(当前调整：唯一角色位置)</div>
-      <div style="display:flex;gap:10px;"><span style="width:30px;">缩放</span><input id="ds-s" type="range" min="0.5" max="1.5" step="0.05" style="flex:1"><span id="v-s" style="width:30px;text-align:right;">1.0</span></div>
-      <div style="display:flex;gap:10px;"><span style="width:30px;">水平</span><input id="ds-x" type="range" min="-1200" max="1200" step="10" style="flex:1"><span id="v-x" style="width:30px;text-align:right;">0</span></div>
-      <div style="display:flex;gap:10px;"><span style="width:30px;">垂直</span><input id="ds-y" type="range" min="-500" max="500" step="10" style="flex:1"><span id="v-y" style="width:30px;text-align:right;">0</span></div>
-      <button id="ds-reset" style="padding:8px;border-radius:8px;border:none;background:rgba(255,255,255,0.1);color:inherit;cursor:pointer;">重置位置</button>
-    `;
-    document.body.appendChild(p);
-
-    var els = {
-      mode: document.getElementById('ds-mode-toggle'),
-      tabs: document.getElementById('ds-tabs'),
-      sLabel: document.getElementById('ds-single-label'),
-      t1: document.getElementById('t-s1'), t2: document.getElementById('t-s2'),
-      s: document.getElementById('ds-s'), x: document.getElementById('ds-x'), y: document.getElementById('ds-y'),
-      ls: document.getElementById('v-s'), lx: document.getElementById('v-x'), ly: document.getElementById('v-y')
-    };
-
-    function refUI() {
-      els.mode.checked = cfg.dualMode;
-      if (cfg.dualMode) {
-        els.tabs.style.display = 'flex'; els.sLabel.style.display = 'none';
-        els.t1.style.background = cfg.activeTab==='slot1'?'rgba(255,255,255,0.15)':'transparent';
-        els.t1.style.opacity = cfg.activeTab==='slot1'?1:0.5;
-        els.t2.style.background = cfg.activeTab==='slot2'?'rgba(255,255,255,0.15)':'transparent';
-        els.t2.style.opacity = cfg.activeTab==='slot2'?1:0.5;
-        bindVals((cfg.activeTab==='slot1') ? cfg.dual.s1 : cfg.dual.s2);
-      } else {
-        els.tabs.style.display = 'none'; els.sLabel.style.display = 'block';
-        bindVals(cfg.single);
-      }
-    }
-    function bindVals(d) {
-      els.s.value = d.s; els.ls.textContent = d.s;
-      els.x.value = d.x; els.lx.textContent = d.x;
-      els.y.value = d.y; els.ly.textContent = d.y;
-    }
-    function save() { localStorage.setItem(KEY, JSON.stringify(cfg)); window.updateSpritePositions(); }
-    function setD(k, v) {
-      if(cfg.dualMode) {
-        if(cfg.activeTab==='slot1') cfg.dual.s1[k]=v; else cfg.dual.s2[k]=v;
-      } else { cfg.single[k]=v; }
-      save();
-    }
-
-    els.mode.onchange = function(e) {
-      cfg.dualMode = e.target.checked;
-      refUI(); save();
-      // 切换到单人时清理战场
-      if(!cfg.dualMode) {
-        var s2=document.getElementById('char-slot-2'); if(s2) s2.style.opacity='0';
-        var s1=document.getElementById('char-slot-1'); if(s1) s1.className='vn-sprite-slot vn-sprite-normal';
-      }
-    };
-    els.t1.onclick = function() { cfg.activeTab='slot1'; refUI(); };
-    els.t2.onclick = function() { cfg.activeTab='slot2'; refUI(); };
-    els.s.oninput = function(e) { setD('s', parseFloat(e.target.value)); els.ls.textContent=e.target.value; };
-    els.x.oninput = function(e) { setD('x', parseInt(e.target.value)); els.lx.textContent=e.target.value; };
-    els.y.oninput = function(e) { setD('y', parseInt(e.target.value)); els.ly.textContent=e.target.value; };
-    document.getElementById('ds-reset').onclick = function() {
-      if(cfg.dualMode) {
-        if(cfg.activeTab==='slot1') cfg.dual.s1={x:-250,y:0,s:1}; else cfg.dual.s2={x:250,y:0,s:1};
-      } else { cfg.single={x:0,y:0,s:1}; }
-      refUI(); save();
-    };
-
-    btn.onclick = function(e) { e.stopPropagation(); p.style.display='flex'; refUI(); };
-    document.getElementById('ds-close').onclick = function() { p.style.display='none'; };
-    document.addEventListener('click', function(e) {
-      if(p.style.display==='flex' && !p.contains(e.target) && e.target!==btn) p.style.display='none';
-    });
-
-    window.updateSpritePositions();
-  }, 1000);
-})();
-</script>
-<!-- === 代码结束 === -->
-</body></html>
+    }</script><script defer="defer" src="main.33348cd273a9f22c79bd.js"></script><script defer="defer" src="main.33348cd273a9f22c79bd.js"></script><script defer="defer" src="main.33348cd273a9f22c79bd.js"></script></body></html>
 ```
